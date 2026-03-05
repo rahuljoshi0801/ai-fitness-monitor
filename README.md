@@ -64,18 +64,33 @@ The focus is mainly the indian food habits and make the system affordable, simpl
 ![Data Flow Diagram](added/dfd.png)
 
 ## Steps to run the prototype
-1.Clone the repo
-2.Ceate and activate a virtual environment
-3.install the required packages
-    py -3.11 -m venv .venv
-    .\.venv\Scripts\activate
-4. install tensorflow 
-    pip install --upgrade pip
+1. Clone the repo:
+   ```bash
+   git clone https://github.com/rahuljoshi0801/ai-fitness-monitor.git
+   cd ai-fitness-monitor
+   ```
+2. Create and activate a virtual environment:
+   ```bash
+   py -3.11 -m venv .venv
+   .\.venv\Scripts\activate
+   ```
+3. Install the required packages:
+   ```bash
+   pip install --upgrade pip
    pip install Flask tensorflow==2.17.0 numpy pillow
-5. run the training script 
-    python ml\food_classifier_training.py
-6. run the app
-    python app.py
+   ```
+4. Download the ML Models & Data from Google Drive:
+   - Download the `models/` folder from the [Google Drive link](https://drive.google.com/drive/folders/1awNis5qDmCYOIn1FVib9OLDbpXd23HzS?usp=sharing).
+   - Place the extracted `models/` folder in the root directory alongside `app.py`.
+   - *(Optional)* Do the same for the `data/` folder if you wish to see the dataset or re-train the model.
+5. (Optional) Run the training script (Only if you downloaded `data/` and want to train from scratch):
+   ```bash
+   python ml\food_classifier_training.py
+   ```
+6. Run the application:
+   ```bash
+   python app.py
+   ```
 
 
 ## Tech Stack 

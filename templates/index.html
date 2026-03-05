@@ -20,7 +20,7 @@
         <strong>{{ user.name }}</strong>
         <span class="auth-email">{{ user.email }}</span>
       </div>
-      <button id="logout-btn" class="ghost-button">Log out</button>
+      <button type="button" id="logout-btn" class="ghost-button">Log out</button>
     </div>
     {% else %}
     <form id="login-banner-form" class="auth-strip auth-strip-guest">
@@ -214,7 +214,10 @@
             </label>
           </section>
 
-            <button type="submit" class="primary-cta">Generate summary</button>
+            <button type="submit" class="primary-cta" id="submit-summary-btn">
+              <span class="btn-text">Generate summary</span>
+              <span class="btn-loading hidden">Generating…</span>
+            </button>
           </form>
         </section>
 
@@ -775,6 +778,10 @@
         });
       }
 
+      const submitBtn = document.getElementById("submit-summary-btn");
+      const btnText = submitBtn?.querySelector(".btn-text");
+      const btnLoading = submitBtn?.querySelector(".btn-loading");
+
       form.addEventListener("submit", async (event) => {
         event.preventDefault();
 
@@ -782,6 +789,12 @@
           alert("Please upload your meal photo before generating the summary.");
           photoInput.focus();
           return;
+        }
+
+        if (submitBtn && btnText && btnLoading) {
+          submitBtn.disabled = true;
+          btnText.classList.add("hidden");
+          btnLoading.classList.remove("hidden");
         }
 
         const formData = new FormData(form);
@@ -868,11 +881,18 @@
           }
 
           resultSection.classList.remove("hidden");
+          resultSection.scrollIntoView({ behavior: "smooth", block: "nearest" });
         } catch (error) {
           alert(
             "Something went wrong. Please try again or check the backend console."
           );
           console.error(error);
+        } finally {
+          if (submitBtn && btnText && btnLoading) {
+            submitBtn.disabled = false;
+            btnText.classList.remove("hidden");
+            btnLoading.classList.add("hidden");
+          }
         }
       });
 

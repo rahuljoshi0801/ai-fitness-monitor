@@ -4,3 +4,7 @@
 
 /ml/__pycache__/
 /tools/__pycache__/
+__pycache__/
+/instance/
+*.sqlite3
+*.db
